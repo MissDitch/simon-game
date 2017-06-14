@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simon game</title>
+  <link href="https://fonts.googleapis.com/css?family=Audiowide|Share+Tech" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <noscript>
+        <p>This page requires a JavaScript-enabled browser.</p>
+    </noscript>
+
+    <div class="flower">
+        <div class="">
+
+        </div> <!-- End -->
+
+        <div class="flower__flower__petals">
+            <div class="grid">
+                <div id="green" class="flower__petal"></div>
+                <div id="red" class="flower__petal"></div>
+                <div id="yellow" class="flower__petal"></div>
+                <div id="blue" class="flower__petal"></div>
+                <audio id="simonSound1" src=" https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" ></audio>
+                <audio id="simonSound2" src=" https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" ></audio>
+                <audio id="simonSound3" src=" https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" ></audio>
+                <audio id="simonSound4" src=" https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" ></audio>
+            </div>
+            <div class="flower__heart" id="">
+              <div id="score">play</div>
+            </div>
+
+        </div> <!-- End flower__flower__petals-->
+        <div class="flower__leaves">
+             <div class="grid2">
+                <div id="" class="flower__petal">
+                     <div id="start" class="button"></div>
+                     <div>start</div>
+                </div>
+                <div id="" class="flower__petal flower--right">
+                     <div id="strict" class="button"></div>
+                     <div>strict</div>
+                </div>
+
+            </div>
+       <!--     <div>
+                <div class="flower__players--player">
+                    <div id="player1" class="player"></div>
+                    <div id="icon1" class="icon"></div>
+                </div>
+                <div class="flower__players--score">
+                    <div>SCORE</div>
+                    <div id="score1">0</div>
+                    <div id="score2">0</div>
+                </div>
+                <div class="flower__players--player">
+                    <div id="player2" class="player"></div>
+                    <div id="icon2" class="icon"></div>
+                </div>
+            </div>  -->
+        </div> <!-- End flower__leaves-->
+
+          <div class="flower__ground">
+          <div>OFF</div>
+
+        <div id="" class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onOff" > <!--  checked  -->
+            <label class="onoffswitch-label" for="onOff"></label>
+        </div>
+
+     <div>ON</div>
+      </div> 
+    <!--    <div class="flower__ground">
+          <div>ON</div>
+          <div id="" class="panel">
+            <div id="onOff" class=""></div>
+          </div>     
+        
+          <div>OFF</div>
+          <div id="onOffPanel" class="panelButton"></div>
+
+
+                </div>  -->
+
+    </div> <!-- End flower-->
+
+    <div class="credits">Design and coding: Marian Sloot</div>
+<!--    <div class="credits">View source code on <a href="https://github.com/MissDitch/tic-tac-toe-app">GitHub</a> </div>  -->
+    <script src="js/main.js"></script>
+</body>
+</html>

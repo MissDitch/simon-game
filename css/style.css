@@ -1,0 +1,353 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+    margin: 5px 0 0 0;
+    text-align: center;
+    font-family: 'Share Tech', sans-serif;
+    background: #000; /*  */
+    color: #ffffff;
+}
+a {
+    text-decoration: none;
+    color: orange;
+}
+.container {
+    padding-top: 1.5rem;
+    width: 100%;
+    height: 100%;
+}
+.button {
+   width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+    background: rgba(255,255,255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+}
+.button:active {
+    transform: scale(0.8);
+    transform-origin: center;
+}
+.flower {
+    margin: 0 auto;
+    width: 300px;
+    //height: 80%;
+
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flower > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*.flower > * > *{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  */
+.flower__petals{
+    position: relative;
+    width: 250px;
+    height: 250px;
+}
+.flower__petal {
+    background-color: #000;
+    background-image: radial-gradient(circle at 14% 14%, #ffffff, #3ad146 33%);
+    height: 100px;
+    border-radius: 14% 50%;
+    //box-shadow: 0 -2px 0 3px green inset, 0 5px 5px rgba(0, 7, 1, 0.17), 0 15px rgba(255, 255, 255, 0.25) inset;
+    box-shadow: 0 0px 0 5px black inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+}
+.grid2 .flower__petal {
+    background-image: none;
+    box-shadow: 0 0px 0 5px rgba(255, 255, 255, 0.3) inset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flower--right {
+  background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #3ad146 33%)
+  height: 100px;
+    border-radius: 50% 14%;
+}
+
+.flower__heart {
+    position: absolute;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    z-index: 10;
+    border-radius: 50%;
+    background-color: #000;
+    background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.7), #000 25%);
+    //box-shadow: 0 0px 0 5px black inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+}
+
+
+.gradient {
+  background-image: radial-gradient(circle at top left, #ffffff, #3ad146 10%);
+}
+div#green {
+    background: #3ad146;
+    background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.7), #3ad146 33%);
+    box-shadow: 0 0px 0 5px #3ad146 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+
+    //border-radius: 0 50%;
+}
+div#red {
+    background: #f62f18;
+    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #f62f18 33%);
+    box-shadow: 0 0px 0 5px #f62f18 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+
+    border-radius: 50% 14%;
+}
+div#blue {
+    background: #00a7ee;
+    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #00a7ee 33%);
+    box-shadow: 0 0px 0 5px #00a7ee inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+  //  border-radius: 50% 5%;
+
+}
+div#yellow {
+  background: #fef93b;
+  background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 1.0), #fef93b 33%);
+  box-shadow: 0 0px 0 5px #fef93b inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+ border-radius: 50% 0;
+border-radius: 50% 14%;
+}
+
+.flower__leaves {
+    width: 250px;
+    height: 140px;
+}
+
+
+.flower__ground {
+    background: black;
+    width: 100%;
+    padding: 20px;
+}
+/*.flower__ground .panel {
+  //  position: relative;
+    width: 5rem;
+    height: 2.5rem;
+    background: white;
+    margin: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.flower__ground .panel > div {
+    position: relative;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 2.1rem;
+    height: 2.1rem;
+  //  padding: 0 2.1rem 0 0;
+    border-radius: 5px;
+    background: blue;
+} */
+
+.flower__stem {
+    width: 5%;
+    background-color: green;
+}
+
+.flower__message {
+    background: rgba(0, 0, 0, 1);
+    border-radius: 8px;
+    opacity: 0;
+    display: none;
+    position: absolute;
+    top: 53px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 295px;
+    height: 436px;
+    transition: opacity 0.3s ease-in-out;
+    flex-direction: column;
+}
+.active {
+    opacity: 0.8;
+    display: block;
+}
+
+/*https://proto.io/freebies/onoff/  */
+.onoffswitch {
+    position: relative; 
+    width: 55px;
+    -webkit-user-select:none; 
+    -moz-user-select:none; 
+    -ms-user-select: none;
+    margin: 0 5px;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    height: 20px; 
+    width: 55px;
+    padding: 0; line-height: 20px;
+  //  border: 2px solid rgba(255,255,255, 0.3);
+
+    background-color: rgba(255,255,255, 0.5);
+  //  border: 2px solid #FFFFFF; 
+    border-radius: 20px;
+ //   background-color: rgba(255,255,255, 0.5);
+   // background-color: #9E9E9E;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; 
+    width: 20px; 
+    margin: 0px;
+    background: #FFFFFF;
+    position: absolute; 
+    top: 0; 
+    bottom: 0;
+    right: 35px;
+ //   border: 2px solid #FFFFFF; 
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #42A5F5;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #42A5F5;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+.grid {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px;
+    -ms-grid-columns: 110px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-rows: 110px  100px;
+    grid-template: repeat(2, 100px) / repeat(2, 100px);
+}
+.grid2 {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px;
+    -ms-grid-columns: 110px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-rows: 100px ;
+    grid-template: 100px / repeat(2, 100px);  ;
+}
+/* For Edge: column-align and row-align make gutters show*/
+.flower__petal:nth-child(1)  {
+    -ms-grid-row: 1; /* default is 1 */
+    -ms-grid-column: 1; /* default is 1 */
+}
+.flower__petal:nth-child(2)  {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    -ms-grid-column-align: end;
+    //background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), green 33%);
+}
+.flower__petal:nth-child(3)  {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-row-align: end;
+}
+.flower__petal:nth-child(4)  {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    -ms-grid-row-align: end;
+    -ms-grid-column-align: end;
+}
+.leave:nth-child(1)  {
+    -ms-grid-row: 1; /* default is 1 */
+    -ms-grid-column: 1; /* default is 1 */
+}
+.leave:nth-child(2)  {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    -ms-grid-column-align: end;
+}
+
+
+.icon {
+    font-family: 'Audiowide', sans-serif;
+    font-size: 3rem;
+    padding: 14px 0 0 0;
+}
+.player {
+    text-transform: uppercase;
+}
+.flower__players--player {
+    width: 90px;
+    align-items: center;
+    justify-content: center;
+}
+.flower__players > div{
+  width: 280px;
+  padding: 0 8px 0 5px;
+}
+.flower__players--score {
+    width: 93px;
+    align-items: center;
+    justify-content: center;
+}
+.flower__players--score > div {
+     display: inline-block;
+     padding: 6px 6px 0px 6px;
+     font-size: 2rem;
+ }
+.flower__players--score > div:first-child {
+     display: block;
+     padding: 0px 0px 0px 0;
+     font-size: 1.5rem;
+ }
+ .credits {
+    color: #a9a9a9;
+    margin-top: 10px;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 20rem) {  /* 320 / 16 = 20rem */
+
+}
+
+/* Extra Small flowers, Phones */
+@media only screen and (min-width : 30rem) {  /* 480 / 16 = 30rem */
+
+}
+
+/* Small flowers, Tablets */
+@media only screen and (min-width : 48rem) {  /* 768 / 16 =  48rem */
+
+}
+
+/* Medium flowers, Desktops */
+@media only screen and (min-width : 62rem) {  /* 992 / 16 = 62rem */
+
+}
+
+/* Large flowers, Wide Screens */
+@media only screen and (min-width : 75rem) { /* 1200 / 16 = 75rem */
+
+}
