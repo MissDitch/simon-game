@@ -17,7 +17,7 @@
 
         </div> <!-- End -->
 
-        <div class="flower__flower__petals">
+        <div class="flower__petals">
             <div class="grid">
                 <div id="green" class="flower__petal"></div>
                 <div id="red" class="flower__petal"></div>
@@ -25,39 +25,47 @@
                 <div id="blue" class="flower__petal"></div>
             </div>
             <div class="flower__heart" id="">
-              <div id="score">play</div>
+                <div id="score">01</div>
             </div>
-        </div> <!-- End flower__flower__petals-->
+        </div> <!-- End flower__petals-->
+
+        <div class="flower__message">
+            You have made a mistake! Listen and try again.
+            <!--   You have won the game! Click reset and start to play again.'  -->
+        </div> <!-- End flower__message-->
 
         <div class="flower__leaves">
              <div class="grid2">
                 <div id="" class="flower__petal">
                      <div id="start" class="button"></div>
-                     <div>start</div>
+                     <div>START</div>
                 </div>
                 <div id="" class="flower__petal flower--right">
                      <div id="strict" class="button"></div>
-                     <div>strict</div>
+                     <div>STRICT</div>
                 </div>
-            </div>     
+            </div>   
+          
         </div> <!-- End flower__leaves-->
 
-          <div class="flower__ground">
-          <div>OFF</div>
-
-        <div id="" class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onOff" checked > <!--    -->
-            <label class="onoffswitch-label" for="onOff"></label>
+        <div>
+             <div id="reset" class="button"></div>
+                     <div>RESET</div>
         </div>
 
-
-     <div>ON</div>
-      </div> 
+        <div class="flower__ground">
+            <div>OFF</div>
+            <div id="" class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onOff" checked > <!--    -->
+                <label class="onoffswitch-label" for="onOff"></label>
+            </div>
+            <div>ON</div>
+        </div> <!-- End flower__ground-->
 
     </div> <!-- End flower-->
+     <div class="title" >Simon Game</div>
 
-    <div class="credits">Design and coding: Marian Sloot</div>
-<!--    <div class="credits">View source code on <a href="https://github.com/MissDitch/tic-tac-toe-app">GitHub</a> </div>  -->
+    <div class="credits">Design and coding: Marian Sloot | View source code on <a href="https://github.com/MissDitch/simon-game">GitHub</a> </div> 
     <script src="js/main.js"></script>
 </body>
 </html>

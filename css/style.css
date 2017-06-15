@@ -1,10 +1,10 @@
 html {
-  box-sizing: border-box;
-  font-size: 62.5%;
+    box-sizing: border-box;
+    font-size: 62.5%;
 
 }
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 body {
     margin: 5px 0 0 0;
@@ -15,19 +15,15 @@ body {
 }
 a {
     text-decoration: none;
-    color: orange;
-}
-.container {
-    padding-top: 1.5rem;
-    width: 100%;
-    height: 100%;
+    color: #42A5F5;
 }
 .button {
-   width: 25px;
+    width: 25px;
     height: 25px;
-    border: 2px solid #fff;
+    border: 3px solid #fff;
     background: rgba(255,255,255, 0.5);
     border-radius: 50%;
+    margin: 0 0 4px 0;
     cursor: pointer;
     outline: none;
 }
@@ -38,10 +34,7 @@ a {
 .flower {
     margin: 0 auto;
     width: 300px;
-    //height: 80%;
-    padding-top: 10px;
-
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,25 +42,51 @@ a {
 }
 .flower > * {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-/*.flower > * > *{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}  */
-.flower__petals{
-    position: relative;
-    width: 250px;
-    height: 250px;
+.flower__petals, .flower__leaves {
+    margin: 4px 0;
 }
 .flower__petal {
-    background-color: #000;
-    background-image: radial-gradient(circle at 14% 14%, #ffffff, #3ad146 33%);
-    height: 120px;
+    height: 100px;
     border-radius: 14% 50%;
-    box-shadow: 0 0px 0 5px black inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+}
+div#green {
+    background: #3ad146;
+    background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #22992c 33%);
+    box-shadow: 0 0px 0 5px #3ad146 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+}
+div#green:active {
+    background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #3ad146 33%);
+}
+div#red {
+    background: #f62f18;
+    background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #c41a06 33%);
+    box-shadow: 0 0px 0 5px #f62f18 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    border-radius: 50% 14%;
+}
+div#red:active {
+    background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.7), #f62f18 33%);
+}
+div#blue {
+    background: #00a7ee;
+    background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.8), #0574a3 33%);
+    box-shadow: 0 0px 0 5px #00a7ee inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+}
+div#blue:active {
+    background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #00a7ee 33%);
+}
+div#yellow {
+    background: #fee73b;
+    background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #c2ab01 33%);
+    box-shadow: 0 0px 0 5px #fee73b inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    border-radius: 50% 0;
+    border-radius: 50% 14%;
+}
+div#yellow:active {
+    background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 1.0), #fee73b 33%);
 }
 .grid2 .flower__petal {
     background-image: none;
@@ -78,96 +97,52 @@ a {
     align-items: center;
 }
 .flower--right {
-  background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #3ad146 33%)
-  height: 100px;
     border-radius: 50% 14%;
 }
 
 .flower__heart {
     position: absolute;
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     z-index: 10;
     border-radius: 50%;
     background-color: #000;
+    color: rgba(255, 255, 255, 1.0);
     background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.7), #000 25%);
+    font-size: 3rem;
 }
-
-
-.gradient {
-    background-image: radial-gradient(circle at top left, #ffffff, #3ad146 10%);
+.flower__message {
+    //opacity: 0.75;
+    opacity: 0;  
+    width: 100%;
+    height: 20px;
+    font-size: 1.3rem;
+    transition: opacity 0.3s ease-in-out;    
 }
-div#green {
-    background: #3ad146;
-    background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.7), #22992c 33%);
-    box-shadow: 0 0px 0 5px #3ad146 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
-}
-div#red {
-    background: #f62f18;
-    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #c41a06 33%);
-    box-shadow: 0 0px 0 5px #f62f18 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
-    border-radius: 50% 14%;
-}
-div#blue {
-    background: #00a7ee;
-    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #0574a3 33%);
-    box-shadow: 0 0px 0 5px #00a7ee inset, 0 5px 5px rgba(0, 7, 1, 0.17);
-
-}
-div#yellow {
-    background: #fee73b;
-    background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 1.0), #c2ab01 33%);
-    box-shadow: 0 0px 0 5px #fee73b inset, 0 5px 5px rgba(0, 7, 1, 0.17);
-    border-radius: 50% 0;
-    border-radius: 50% 14%;
-}
-div#green:active {
-    background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.7), #3ad146 33%);
-}
-
-div#red:active {
-    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #f62f18 33%);
-}
-div#blue:active {
-    background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), #00a7ee 33%);
-}
-div#yellow:active {
-    background-image: radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 1.0), #fee73b 33%);
-}
-.flower__leaves {
-    width: 290px;
-    height: 140px;
+.active {
+    opacity: 0.75;
+    display: block;
 }
 .flower__ground {
     background: black;
     width: 100%;
-    padding: 20px;
+    margin: 18px 0 34px 0;
+    flex-direction: row;
+}
+.title {    
+    font-size: 4rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.3);
+}
+.credits {
+    color: #a9a9a9;
+    margin: 5px 0;
 }
 
-.flower__message {
-    background: rgba(0, 0, 0, 1);
-    border-radius: 8px;
-    opacity: 0;
-    display: none;
-    position: absolute;
-    top: 53px;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 295px;
-    height: 436px;
-    transition: opacity 0.3s ease-in-out;
-    flex-direction: column;
-}
-.active {
-    opacity: 0.8;
-    display: block;
-}
 
 /*https://proto.io/freebies/onoff/  */
 .onoffswitch {
@@ -185,30 +160,32 @@ div#yellow:active {
     display: block; 
     overflow: hidden; 
     cursor: pointer;
-    height: 20px; 
+    height: 25px; 
     width: 55px;
-    padding: 0; line-height: 20px;
+    padding: 0; 
+    line-height: 20px;
     background-color: rgba(255,255,255, 0.5);
-    border-radius: 20px;
+    border-radius: 25px;
     transition: background-color 0.3s ease-in;
 }
 .onoffswitch-label:before {
     content: "";
     display: block; 
-    width: 20px; 
+    width: 25px; 
     margin: 0px;
     background: #FFFFFF;
     position: absolute; 
     top: 0; 
     bottom: 0;
-    right: 35px;
-    border-radius: 20px;
+    right: 30px;
+    border-radius: 25px;
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label {
     background-color: #42A5F5;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+.onoffswitch-checkbox:checked + .onoffswitch-label, 
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
    border-color: #42A5F5;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
@@ -219,17 +196,17 @@ div#yellow:active {
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
-    -ms-grid-columns: 130px  120px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
-    -ms-grid-rows: 130px  120px;
-    grid-template: repeat(2, 120px) / repeat(2, 120px);
+    -ms-grid-columns: 100px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-rows: 100px  100px;
+    grid-template: repeat(2, 100px) / repeat(2, 100px);
 }
 .grid2 {
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
-    -ms-grid-columns: 130px  120px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
-    -ms-grid-rows: 120px ;
-    grid-template: 120px / repeat(2, 120px);  ;
+    -ms-grid-columns: 100px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-rows: 100px ;
+    grid-template: 100px / repeat(2, 100px);  ;
 }
 /* For Edge: column-align and row-align make gutters show*/
 .flower__petal:nth-child(1)  {
@@ -240,7 +217,6 @@ div#yellow:active {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
     -ms-grid-column-align: end;
-    //background-image: radial-gradient(circle at 22% 22%, rgba(255, 255, 255, 0.7), green 33%);
 }
 .flower__petal:nth-child(3)  {
     -ms-grid-row: 2;
@@ -254,51 +230,13 @@ div#yellow:active {
     -ms-grid-column-align: end;
 }
 .leave:nth-child(1)  {
-    -ms-grid-row: 1; /* default is 1 */
-    -ms-grid-column: 1; /* default is 1 */
+    -ms-grid-row: 1; 
+    -ms-grid-column: 1; 
 }
 .leave:nth-child(2)  {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
     -ms-grid-column-align: end;
-}
-
-
-.icon {
-    font-family: 'Audiowide', sans-serif;
-    font-size: 3rem;
-    padding: 14px 0 0 0;
-}
-.player {
-    text-transform: uppercase;
-}
-.flower__players--player {
-    width: 90px;
-    align-items: center;
-    justify-content: center;
-}
-.flower__players > div{
-  width: 280px;
-  padding: 0 8px 0 5px;
-}
-.flower__players--score {
-    width: 93px;
-    align-items: center;
-    justify-content: center;
-}
-.flower__players--score > div {
-     display: inline-block;
-     padding: 6px 6px 0px 6px;
-     font-size: 2rem;
- }
-.flower__players--score > div:first-child {
-     display: block;
-     padding: 0px 0px 0px 0;
-     font-size: 1.5rem;
- }
- .credits {
-    color: #a9a9a9;
-    margin-top: 10px;
 }
 
 /* Custom, iPhone Retina */
