@@ -4,7 +4,7 @@ function init() {
    listener("add", "id", "reset", "click", reset); // comment this out if on-off switch should function
    listener("add", "id", "strict", "click", strict); // comment this out if on-off switch should function
 }
-var greenAudio = document.createElement('audio'),
+const greenAudio = document.createElement('audio'),
     redAudio = document.createElement('audio'),
     yellowAudio = document.createElement('audio'),
     blueAudio = document.createElement('audio');
@@ -13,6 +13,62 @@ var greenAudio = document.createElement('audio'),
     redAudio.setAttribute('src','https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
     yellowAudio.setAttribute('src','https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
     blueAudio.setAttribute('src','https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+
+const str1 =  "background-image: radial-gradient(circle at ";
+const str2 = ", rgba(255, 255, 255, 0.7), ";
+const str3 = " 33%);";
+const greenActivestr = str1 + "19% 19%" + str2 + "#3ad146" + str3;
+const greenDefaultstr = str1 + "19% 19%" + str2 + "#22992c" + str3;
+
+const redActivestr = str1 + "27% 27%" + str2 + "#f62f18" + str3;
+const redDefaultstr = str1 + "27% 27%" + str2 + "#c41a06" + str3;
+
+const blueActivestr = str1 + "19% 19%" + str2 + "#00a7ee" + str3;
+const blueDefaultstr = str1 + "19% 19%" + str2 + "#0574a3" + str3;
+
+const yellowActivestr = str1 + "27% 27%" + str2 + "#fee73b" + str3;
+const yellowDefaultstr = str1 + "27% 27%" + str2 + "#c2ab01" + str3;
+
+var Petal = function(audio, id, defaultStyle, lightStyle) {   
+    var self = this,
+   // defaultStyle = defaultStyle,
+    lightStyle = lightStyle;
+ //   isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2;
+
+    this.audio = audio;
+ //   this.isPlaying = isPlaying;
+    this.id = id;
+    this.defaultStyle = defaultStyle;
+    //this.lightStyle = lightStyle;
+    this.simonPlayLight = function() {
+      //  if (!isPlaying) {
+          setTimeout(function(){
+             self.audio.play();
+            document.getElementById(id).style = lightStyle;    
+            //self.stop(id, defaultStyle);   
+          }, 150);
+           
+    //    }
+       
+    } 
+    this.simonStopLight =  function() {        
+        setTimeout(function() {
+            var id = self.id, defaultStyle = self.defaultStyle;
+            document.getElementById(id).style = defaultStyle;
+            self.audio.pause();
+           // self.isPlaying = false;
+        }, 700);
+    }
+}
+
+const greenPetal = new Petal(greenAudio, "green", greenDefaultstr, greenActivestr);
+const redPetal = new Petal(redAudio, "red", redDefaultstr, redActivestr);
+const bluePetal = new Petal(blueAudio, "blue", blueDefaultstr, blueActivestr);
+const yellowPetal = new Petal(yellowAudio, "yellow", yellowDefaultstr, yellowActivestr);
+
+const petalArray = [greenPetal, redPetal, bluePetal, yellowPetal];
+
+
 
 
 function listener(addOrRemove, prop, selector, event, func) {
@@ -36,7 +92,7 @@ function onAndOff(e) {
         //dectivate start button
         e.target.classList.remove("onOff"); 
         document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
-        stop();
+        simonStopLight();
     }
     else {
         //  alert("on");
@@ -44,19 +100,15 @@ function onAndOff(e) {
         //activate start button
         listener("add", "id", "start", "click", start);
         // activate reset button
-         listener("add", "id", "reset", "click", reset); 
+        listener("add", "id", "reset", "click", reset); 
         //activate strict button
         listener("add", "id", "strict", "click", strict);    
     }
 }
-function start(e) {
-   // e.target.style = "background:#42A5F5";
-    listener("add", "id", "green", "click", play);    
-    listener("add", "id", "red", "click", play);
-    listener("add", "id", "blue", "click", play);
-    listener("add", "id", "yellow", "click", play);
-    
+function start(e) {    
     document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
+    document.getElementById("score").textContent = "--";
+    addSound();
 }
 function strict(e) {
     e.target.style = "background:#42A5F5";
@@ -64,31 +116,111 @@ function strict(e) {
 
 }
 function reset(e) {
-     document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
+    document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
+    document.getElementById("score").textContent = "";
+    counter = 0; 
+    clickCount = 0; 
+    scoreCount = 0;
 }
-function stop() {
-    listener("remove", "id", "start", "click", start);
-    listener("remove", "id", "green", "click", play);    
-    listener("remove", "id", "red", "click", play);
-    listener("remove", "id", "blue", "click", play);
-    listener("remove", "id", "yellow", "click", play);
+function disableClick() {
+    clickable = false;
+    listener("remove", "id", "green", "click", playOnClick);    
+    listener("remove", "id", "red", "click", playOnClick);
+    listener("remove", "id", "blue", "click", playOnClick);
+    listener("remove", "id", "yellow", "click", playOnClick);
 }
-function play(e) {
-    var audio, target, origStyle, playStyle;
-    target = e.target;
-    origStyle = target.style;
-    if (target.id === "green" ) {
-        greenAudio.play();
+function enableClick() {
+    clickable = true;
+    listener("add", "id", "green", "click", playOnClick);    
+    listener("add", "id", "red", "click", playOnClick);
+    listener("add", "id", "blue", "click", playOnClick);
+    listener("add", "id", "yellow", "click", playOnClick);
+}
+function playOnClick(e) {
+    var id = e.target.id, int, message;   
+    
+    switch (id) {
+        case "green": int = 0;     
+        e.target.classList.add("green");       
+            break;
+        case "red": int = 1;
+            break;
+         case "blue": int = 2;
+            break;
+        case "yellow": int = 3;           
+            break;
     }
-    if (e.target.id === "red" ) {
-        redAudio.play();
+   // petalArray[int].playerPlay();            
+   // petalArray[int].simonStopLight();
+    //compare:
+    if (clickCount < simonArr.length) {
+        if (int === simonArr[clickCount]) {
+           // alert(" right! ");        
+            clickCount++;  
+            if (clickCount === simonArr.length) {
+                addSound();
+            }       
+        }
+        else {
+            message = document.getElementById("message");
+            message.classList.add("active");
+            message.textContent = "You have made a mistake! Listen and try again.";
+            counter = 0;
+            clickCount = 0;
+                     
+            simonPlay(); 
+        }   
     }
-    if (e.target.id === "blue" ) {
-        blueAudio.play();
-    }
-    if (e.target.id === "yellow" ) {
-        yellowAudio.play();
-    }
+    else {
+        addSound();
+    } 
+
+
+}
+
+var simonArr = [];  // store randomly generated sound/light
+var counter = 0;  // counter corresponds to position in simonArr
+var clickCount = 0;  // counter of user's clicks
+var scoreCount = 0;
+var clickable = false;
+
+// generate a new sound and add it to the array, then play all of them
+function addSound() {
+    disableClick();   
+    setTimeout(function() {          
+        var int = Math.floor(Math.random() * 4); 
+        simonArr.push(int);
+        scoreCount++;       
+        document.getElementById("score").textContent = scoreCount; 
+        counter = 0;   
+        simonPlay();
+        
+    }, 700);
+    
+}
+
+// play all sounds from the beginning
+function simonPlay() {  
+    var timeout, timeoutID, timeoutID2, int = simonArr[counter]; 
+    disableClick();   
+    setTimeout(function() {               
+        timeoutID2 = setTimeout(function() {
+            message = document.getElementById("message");
+            message.classList.remove("active");                 
+        }, 700);
+        petalArray[int].simonPlayLight();
+        petalArray[int].simonStopLight();
+        counter === 0 ? timeout = 1000 : timeout = 700;
+        if (++counter < simonArr.length) {            
+            timeoutID = setTimeout(simonPlay, timeout);
+           // clearInterval(timeoutID);
+        }
+        enableClick();        
+        clickCount = 0;
+    }, 700); 
+       
+    
 }
 
 init();
+
