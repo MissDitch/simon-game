@@ -50,8 +50,8 @@ var Petal = function(audio, id, defaultStyle, lightStyle) {
                 setTimeout(function() {
                 var id = self.id, defaultStyle = self.defaultStyle;
                 document.getElementById(id).style = defaultStyle;
-                self.audio.pause();
-                }, 700); 
+                //self.audio.pause();
+                }, 500); 
           }, 150);
     } 
 }
@@ -110,12 +110,12 @@ function strict(e) {
    // document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
 
 }
-function reset(e) {
-    document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
-    document.getElementById("score").textContent = "";
-    counter = 0; 
-    clickCount = 0; 
-    scoreCount = 0;
+function reset(e) {   
+    simonArr = [];  
+    counter = 0;  
+    clickCount = 0;  
+    scoreCount = 0;  
+    start();
 }
 function disableClick() {
     clickable = false;
@@ -193,17 +193,18 @@ function playOnClick(e) {
 var simonArr = [];  // store randomly generated sound/light
 var counter = 0;  // counter corresponds to position in simonArr
 var clickCount = 0;  // counter of user's clicks
-var scoreCount = 0;
-var clickable = false;
+var scoreCount = 0;  // corresponds to number of sounds in simonArr
 
 // generate a new sound and add it to the array, then play all of them
 function addSound() {
+    var score = document.getElementById("score");
     disableClick();   
     setTimeout(function() {          
         var int = Math.floor(Math.random() * 4); 
         simonArr.push(int);
-        scoreCount++;       
-        document.getElementById("score").textContent = scoreCount; 
+        scoreCount++;   
+        scoreCount < 10 ? score.textContent = "0" + scoreCount
+        : score.textContent = scoreCount; 
         counter = 0;   
         simonPlay();
         
