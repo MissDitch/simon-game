@@ -4,6 +4,7 @@ function init() {
    listener("add", "id", "reset", "click", reset); // comment this out if on-off switch should function
    listener("add", "id", "strict", "click", strict); // comment this out if on-off switch should function
 }
+
 const greenAudio = document.createElement('audio'),
     redAudio = document.createElement('audio'),
     yellowAudio = document.createElement('audio'),
@@ -44,21 +45,15 @@ var Petal = function(audio, id, defaultStyle, lightStyle) {
       //  if (!isPlaying) {
           setTimeout(function(){
              self.audio.play();
-            document.getElementById(id).style = lightStyle;    
-            //self.stop(id, defaultStyle);   
+                document.getElementById(id).style = lightStyle;    
+                //self.stop(id, defaultStyle);  
+                setTimeout(function() {
+                var id = self.id, defaultStyle = self.defaultStyle;
+                document.getElementById(id).style = defaultStyle;
+                self.audio.pause();
+                }, 700); 
           }, 150);
-           
-    //    }
-       
     } 
-    this.simonStopLight =  function() {        
-        setTimeout(function() {
-            var id = self.id, defaultStyle = self.defaultStyle;
-            document.getElementById(id).style = defaultStyle;
-            self.audio.pause();
-           // self.isPlaying = false;
-        }, 700);
-    }
 }
 
 const greenPetal = new Petal(greenAudio, "green", greenDefaultstr, greenActivestr);
@@ -92,7 +87,7 @@ function onAndOff(e) {
         //dectivate start button
         e.target.classList.remove("onOff"); 
         document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
-        simonStopLight();
+        //simonStopLight();
     }
     else {
         //  alert("on");
@@ -124,6 +119,10 @@ function reset(e) {
 }
 function disableClick() {
     clickable = false;
+    document.getElementById("green").classList.remove("hasActive");
+    document.getElementById("red").classList.remove("hasActive");
+    document.getElementById("blue").classList.remove("hasActive");
+    document.getElementById("yellow").classList.remove("hasActive");
     listener("remove", "id", "green", "click", playOnClick);    
     listener("remove", "id", "red", "click", playOnClick);
     listener("remove", "id", "blue", "click", playOnClick);
@@ -131,6 +130,10 @@ function disableClick() {
 }
 function enableClick() {
     clickable = true;
+    document.getElementById("green").classList.add("hasActive");
+    document.getElementById("red").classList.add("hasActive");
+    document.getElementById("blue").classList.add("hasActive");
+    document.getElementById("yellow").classList.add("hasActive");
     listener("add", "id", "green", "click", playOnClick);    
     listener("add", "id", "red", "click", playOnClick);
     listener("add", "id", "blue", "click", playOnClick);
@@ -140,17 +143,16 @@ function playOnClick(e) {
     var id = e.target.id, int, message;   
     
     switch (id) {
-        case "green": int = 0;     
-        e.target.classList.add("green");       
+        case "green": int = 0;             
             break;
-        case "red": int = 1;
+        case "red": int = 1;          
             break;
-         case "blue": int = 2;
+         case "blue": int = 2;          
             break;
-        case "yellow": int = 3;           
+        case "yellow": int = 3;                  
             break;
     }
-   // petalArray[int].playerPlay();            
+    petalArray[int].simonPlayLight();            
    // petalArray[int].simonStopLight();
     //compare:
     if (clickCount < simonArr.length) {
@@ -158,21 +160,31 @@ function playOnClick(e) {
            // alert(" right! ");        
             clickCount++;  
             if (clickCount === simonArr.length) {
-                addSound();
+                setTimeout(function() {
+                    addSound();
+                }, 1500);
+                
             }       
         }
         else {
             message = document.getElementById("message");
             message.classList.add("active");
             message.textContent = "You have made a mistake! Listen and try again.";
+            timeoutID2 = setTimeout(function() {
+                message = document.getElementById("message");
+                message.classList.remove("active");                 
+            }, 1500);
             counter = 0;
             clickCount = 0;
-                     
-            simonPlay(); 
+            setTimeout(function() {
+                simonPlay(); 
+            }, 1500);  
         }   
     }
     else {
-        addSound();
+        setTimeout(function() {
+            addSound();
+        }, 1500);
     } 
 
 
@@ -201,23 +213,27 @@ function addSound() {
 
 // play all sounds from the beginning
 function simonPlay() {  
-    var timeout, timeoutID, timeoutID2, int = simonArr[counter]; 
+    var timeout = 500, timeoutID, timeoutID2, int = simonArr[counter]; 
     disableClick();   
     setTimeout(function() {               
-        timeoutID2 = setTimeout(function() {
+       /* timeoutID2 = setTimeout(function() {
             message = document.getElementById("message");
             message.classList.remove("active");                 
-        }, 700);
+        }, 500); */
         petalArray[int].simonPlayLight();
-        petalArray[int].simonStopLight();
-        counter === 0 ? timeout = 1000 : timeout = 700;
+        //petalArray[int].simonStopLight();
+       // counter === 0 ? timeout = 1000 : timeout = 500;
         if (++counter < simonArr.length) {            
             timeoutID = setTimeout(simonPlay, timeout);
            // clearInterval(timeoutID);
-        }
-        enableClick();        
+        }       
         clickCount = 0;
-    }, 700); 
+         if (counter === simonArr.length) {
+        enableClick(); 
+    }
+    }, timeout); 
+
+   
        
     
 }

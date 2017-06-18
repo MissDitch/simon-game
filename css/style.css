@@ -58,7 +58,7 @@ div#green {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #22992c 33%);
     box-shadow: 0 0px 0 5px #3ad146 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
 }
-div#green:active {
+div#green.hasActive:active {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #3ad146 33%);
 }
 div#red {
@@ -67,7 +67,7 @@ div#red {
     box-shadow: 0 0px 0 5px #f62f18 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
     border-radius: 50% 14%;
 }
-div#red:active {
+div#red.hasActive::active {
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #f62f18 33%);
 }
 div#blue {
@@ -75,7 +75,7 @@ div#blue {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.8), #0574a3 33%);
     box-shadow: 0 0px 0 5px #00a7ee inset, 0 5px 5px rgba(0, 7, 1, 0.17);
 }
-div#blue:active {
+div#blue.hasActive::active {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.8), #00a7ee 33%);
 }
 div#yellow {
@@ -85,7 +85,7 @@ div#yellow {
     border-radius: 50% 0;
     border-radius: 50% 14%;
 }
-div#yellow:active {
+div#yellow.hasActive::active {
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #fee73b 33%);
 }
 .grid2 .flower__petal {
