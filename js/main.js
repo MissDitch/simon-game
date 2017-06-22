@@ -60,8 +60,6 @@ var SimonGame = function() {
     petalArray = [greenPetal, redPetal, bluePetal, yellowPetal];
 
     var self = this,
-    
-    isFinished = false;
 
     onAndOff = function(e) {
         if ( e.target.classList.contains("onOff")) {
@@ -85,16 +83,18 @@ var SimonGame = function() {
             listener("add", "id", "strict", "click", strict);    
         }
     },    
-    start = function(e) {    
+    start = function(e) {   
+        self.isStrict = false; 
         document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
         // document.getElementById("step").textContent = "--";
         beginGame();
     },
     strict = function(e) {
-        e.target.style = "background:#42A5F5";
-        
-    // document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
-
+        self.isStrict = true;
+        document.getElementById("strict").style = "background:#42A5F5";
+       //e.target.style = "background:#42A5F5";        
+        document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
+        beginGame();
     },
     reset = function(e) {   
         self.simonArr.length = 0;  
@@ -102,7 +102,8 @@ var SimonGame = function() {
         self.clickCount = 0;  
         self.stepCount = 0;  
         self.playerStepCount = 0;
-        start();
+        if (self.isStrict) { strict(); }
+        else  start();
     },
     disableClick = function() {
         clickable = false;
@@ -146,30 +147,38 @@ var SimonGame = function() {
                 self.clickCount++;  
                 if (self.clickCount === self.simonArr.length) {
                     self.playerStepCount++;
-                     setTimeout(function() {
+                    disableClick();
+                    setTimeout(function() {
                         timeout = checkEndGame();  
                         setTimeout(function() {
                             addSound();
                         }, timeout);           
-                    }, 1300);       
-                   /* checkEndGame();  
-                    setTimeout(function() {
-                        addSound();
-                    }, 1500);    */                 
+                    }, 1300);              
                 }       
             }
             else {
                 message.classList.add("active");
-                message.textContent = "You have made a mistake! Listen and try again.";
-                setTimeout(function() {
-                    message = document.getElementById("message");
-                    message.classList.remove("active");                 
-                }, 1500);
-                self.counter = 0;
-                self.clickCount = 0;
-                setTimeout(function() {
-                    simonPlay(); 
-                }, 1500);  
+                 if (self.isStrict) {
+                    message.textContent = "You have made a mistake! You have to start all over again.";
+                    setTimeout(function() {
+                        message.classList.remove("active");                 
+                    }, 1500);
+                    setTimeout(function() {
+                        beginGame();
+                    }, 1500);  
+                    
+                } else {
+                    message.textContent = "You have made a mistake! Listen and try again.";
+                
+                    setTimeout(function() {
+                        message.classList.remove("active");                 
+                    }, 1500);
+                    self.counter = 0;
+                    self.clickCount = 0;
+                    setTimeout(function() {
+                        simonPlay(); 
+                    }, 1500);  
+                }
             }   
         }
         self.proceed = true;   // all buttons have been clicked correctly   
@@ -237,6 +246,7 @@ var SimonGame = function() {
         }
     };
 
+    this.isStrict = false;
     this.proceed = true; 
     this.counter = 0;  // corresponds to position in simonArr
     this.clickCount = 0;  // counter of user's clicks within a step
