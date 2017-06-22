@@ -5,7 +5,7 @@ function init() {
     //listener("add", "id", "reset", "click", simon.reset); // comment this out if on-off switch should function
     //listener("add", "id", "strict", "click", simon.strict); // comment this out if on-off switch should function
 }
-
+ 
 
 var Petal = function(audio, id, defaultStyle, lightStyle) {   
     var self = this,
@@ -59,18 +59,20 @@ var SimonGame = function() {
 
     petalArray = [greenPetal, redPetal, bluePetal, yellowPetal];
 
-    var simonArr = [],  // store randomly generated sound/light
-    counter = 0,  // counter corresponds to position in simonArr
-    clickCount = 0,  // counter of user's clicks
-    stepCount = 0;  // corresponds to number of sounds in simonArr
+    var self = this,
+    
+    isFinished = false;
 
-    var onAndOff = function(e) {
+    onAndOff = function(e) {
         if ( e.target.classList.contains("onOff")) {
             //  alert("off");
             //dectivate start button
             e.target.classList.remove("onOff"); 
             document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
-            //simonStopLight();
+            document.getElementById("step").textContent = "";
+            self.simonArr.length = 0;
+            self.counter = 0;
+            self.clickCount = 0;
         }
         else {
             //  alert("on");
@@ -85,8 +87,8 @@ var SimonGame = function() {
     },    
     start = function(e) {    
         document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
-        document.getElementById("step").textContent = "--";
-        addSound();
+        // document.getElementById("step").textContent = "--";
+        beginGame();
     },
     strict = function(e) {
         e.target.style = "background:#42A5F5";
@@ -95,10 +97,11 @@ var SimonGame = function() {
 
     },
     reset = function(e) {   
-        simonArr = [];  
-        counter = 0;  
-        clickCount = 0;  
-        stepCount = 0;  
+        self.simonArr.length = 0;  
+        self.counter = 0;  
+        self.clickCount = 0;  
+        self.stepCount = 0;  
+        self.playerStepCount = 0;
         start();
     },
     disableClick = function() {
@@ -124,7 +127,7 @@ var SimonGame = function() {
         listener("add", "id", "yellow", "click", playOnClick);
     },
     playOnClick = function(e) {
-        var id = e.target.id, int, message;       
+        var id = e.target.id, int, timeout, message = document.getElementById("message");      
         switch (id) {
             case "green": int = 0;             
                 break;
@@ -135,67 +138,112 @@ var SimonGame = function() {
             case "yellow": int = 3;                  
                 break;
         }
-        petalArray[int].simonPlayLight();            
-        if (clickCount < simonArr.length) {
-            if (int === simonArr[clickCount]) {
-                clickCount++;  
-                if (clickCount === simonArr.length) {
+        self.petalArray[int].simonPlayLight();   
+ 
+
+        if (self.clickCount < self.simonArr.length) {  
+            if (int === self.simonArr[self.clickCount]) {
+                self.clickCount++;  
+                if (self.clickCount === self.simonArr.length) {
+                    self.playerStepCount++;
+                     setTimeout(function() {
+                        timeout = checkEndGame();  
+                        setTimeout(function() {
+                            addSound();
+                        }, timeout);           
+                    }, 1300);       
+                   /* checkEndGame();  
                     setTimeout(function() {
                         addSound();
-                    }, 1500);                    
+                    }, 1500);    */                 
                 }       
             }
             else {
-                message = document.getElementById("message");
                 message.classList.add("active");
                 message.textContent = "You have made a mistake! Listen and try again.";
                 setTimeout(function() {
                     message = document.getElementById("message");
                     message.classList.remove("active");                 
                 }, 1500);
-                counter = 0;
-                clickCount = 0;
+                self.counter = 0;
+                self.clickCount = 0;
                 setTimeout(function() {
                     simonPlay(); 
                 }, 1500);  
             }   
         }
-        else {
-            setTimeout(function() {
-                addSound();
-            }, 1500);
-        } 
+        self.proceed = true;   // all buttons have been clicked correctly   
     },
+    beginGame = function() {
+        self.proceed = true;
+        self.simonArr.length = 0;  
+        self.counter = 0;  
+        self.clickCount = 0;  
+        self.stepCount = 0;  
+        self.playerStepCount = 0;
+        document.getElementById("step").textContent = "--";
+        addSound();
+    },
+   
     // generate a new sound and add it to the array, then play all of them
-     addSound = function() {
-        var step = document.getElementById("step");
-        disableClick();   
-        setTimeout(function() {          
-            var int = Math.floor(Math.random() * 4); 
-            simonArr.push(int);
-            stepCount++;   
-            stepCount < 10 ? step.textContent = "0" + stepCount
-            : step.textContent = stepCount; 
-            counter = 0;   
-            simonPlay();        
-        }, 700);    
+    addSound = function() {
+        if (self.proceed) {
+            var step = document.getElementById("step");
+            disableClick();   
+            setTimeout(function() {          
+                var int = Math.floor(Math.random() * 4); 
+                self.simonArr.push(int);
+                self.stepCount++;  
+                if (self.stepCount < 10) { step.textContent = "0" + self.stepCount; }
+                else { step.textContent = self.stepCount; }
+                //self.stepCount < 10 ? step.textContent = "0" + self.stepCount : step.textContent = self.stepCount; 
+                self.counter = 0;   
+                simonPlay();        
+            }, 700); 
+        }   
     },
     // play all sounds from the beginning
     simonPlay = function() {  
-        var timeout = 500, int = simonArr[counter]; 
+        var int = self.simonArr[self.counter]; 
         disableClick();   
         setTimeout(function() {           
-            petalArray[int].simonPlayLight();
+            self.petalArray[int].simonPlayLight();
           
-            if (++counter < simonArr.length) {            
-                setTimeout(simonPlay, timeout);
+            if (++self.counter < self.simonArr.length) {            
+                setTimeout(simonPlay, 500);
             }       
-            clickCount = 0;
-            if (counter === simonArr.length) {
-            enableClick(); 
+            self.clickCount = 0;
+            if (self.counter === self.simonArr.length) {
+                self.proceed = false;
+                enableClick(); 
+            }
+        }, 500);         
+    },
+     checkEndGame = function() {
+        var timout = 300, message = document.getElementById("message");
+        if (self.playerStepCount === 20) {
+            timeout = 1300;
+            message.classList.add("active");
+            message.textContent = "You have won the game! Now a new game starts.";
+            
+            setTimeout(function() {
+                message = document.getElementById("message");
+                message.classList.remove("active");            
+            }, 1500);
+             
+            document.getElementById("step").textContent = "--";
+            beginGame(); 
+            return timeout;   
         }
-        }, timeout);         
     };
+
+    this.proceed = true; 
+    this.counter = 0;  // corresponds to position in simonArr
+    this.clickCount = 0;  // counter of user's clicks within a step
+    this.stepCount = 0;  // counter of game's steps, corresponds to simonArr's length
+    this.playerStepCount = 0;  // counter of player's succesfully completed steps
+    this.simonArr = [];    // store randomly generated sound/light
+    this.petalArray = petalArray;
 
     this.onAndOff = onAndOff;
     this.reset = reset;
@@ -222,6 +270,8 @@ function listener(addOrRemove, prop, selector, event, func) {
   }
 }
 
+var simon = new SimonGame(); 
+    listener("add", "id", "onOff", "click", simon.onAndOff); 
 
-init();
+//init();
 
