@@ -19,9 +19,9 @@ var Petal = function(audio, id, defaultStyle, lightStyle) {
         setTimeout(function(){
             self.audio.play();
             var id = self.id;
-            document.getElementById(id).style = self.lightStyle;    
+            document.getElementById(id).setAttribute('style', self.lightStyle);    
             setTimeout(function() {
-                document.getElementById(id).style = self.defaultStyle;
+                document.getElementById(id).setAttribute('style', self.defaultStyle);
             }, 500); 
         }, 150);
     } 
@@ -67,7 +67,9 @@ var SimonGame = function() {
             //  alert("off");
             //dectivate start button
             e.target.classList.remove("onOff"); 
-            document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
+            // document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";  // this does not work in Edge
+            document.getElementById("start").setAttribute("style", "background:rgba(255,255,255, 0.5)");
+            document.getElementById("strict").setAttribute("style", "background:rgba(255,255,255, 0.5)");  
             document.getElementById("step").textContent = "";
             self.simonArr.length = 0;
             self.counter = 0;
@@ -86,15 +88,17 @@ var SimonGame = function() {
     },    
     start = function(e) {   
         self.isStrict = false; 
-        document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";
+        // document.getElementById("strict").style = "background:rgba(255,255,255, 0.5)";  // this does not work in Edge
+        document.getElementById("strict").setAttribute("style", "background:rgba(255,255,255, 0.5)");  
         // document.getElementById("step").textContent = "--";
         beginGame();
     },
     strict = function(e) {
         self.isStrict = true;
-        document.getElementById("strict").style = "background:#42A5F5";
+        // document.getElementById("strict").style = "background:#42A5F5";   // this does not work in Edge
+        document.getElementById("strict").setAttribute("style", "background:#42A5F5");
        //e.target.style = "background:#42A5F5";        
-        document.getElementById("start").style = "background:rgba(255,255,255, 0.5)";
+        document.getElementById("start").setAttribute("style", "background:rgba(255,255,255, 0.5)");
         beginGame();
     },
     reset = function(e) {   
