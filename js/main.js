@@ -14,15 +14,16 @@ var Petal = function(audio, id, defaultStyle, lightStyle) {
     this.audio = audio;
     this.id = id;
     this.defaultStyle = defaultStyle;
+    this.lightStyle = lightStyle;
     this.simonPlayLight = function() {
-          setTimeout(function(){
-             self.audio.play();
-                document.getElementById(id).style = lightStyle;    
-                setTimeout(function() {
-                var id = self.id, defaultStyle = self.defaultStyle;
-                document.getElementById(id).style = defaultStyle;
-                }, 500); 
-          }, 150);
+        setTimeout(function(){
+            self.audio.play();
+            var id = self.id;
+            document.getElementById(id).style = self.lightStyle;    
+            setTimeout(function() {
+                document.getElementById(id).style = self.defaultStyle;
+            }, 500); 
+        }, 150);
     } 
 }
 

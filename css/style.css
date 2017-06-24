@@ -51,12 +51,13 @@ a {
 }
 .flower__petal {
     height: 100px;
+    width: 100px;
     border-radius: 14% 50%;
 }
 div#green {
     background: #3ad146;
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #22992c 33%);
-    box-shadow: 0 0px 0 5px #3ad146 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    box-shadow: 0px 0px 0px 5px #3ad146 inset;
 }
 div#green.hasActive:active {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.7), #3ad146 33%);
@@ -64,33 +65,33 @@ div#green.hasActive:active {
 div#red {
     background: #f62f18;
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #c41a06 33%);
-    box-shadow: 0 0px 0 5px #f62f18 inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    box-shadow: 0px 0px 0px 5px #f62f18 inset;
     border-radius: 50% 14%;
 }
-div#red.hasActive::active {
+div#red.hasActive:active {
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #f62f18 33%);
 }
 div#blue {
     background: #00a7ee;
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.8), #0574a3 33%);
-    box-shadow: 0 0px 0 5px #00a7ee inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    box-shadow: 0px 0px 0px 5px #00a7ee inset;
 }
-div#blue.hasActive::active {
+div#blue.hasActive:active {
     background-image: radial-gradient(circle at 19% 19%, rgba(255, 255, 255, 0.8), #00a7ee 33%);
 }
 div#yellow {
     background: #fee73b;
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #c2ab01 33%);
-    box-shadow: 0 0px 0 5px #fee73b inset, 0 5px 5px rgba(0, 7, 1, 0.17);
+    box-shadow: 0px 0px 0px 5px #fee73b inset;
     border-radius: 50% 0;
     border-radius: 50% 14%;
 }
-div#yellow.hasActive::active {
+div#yellow.hasActive:active {
     background-image: radial-gradient(circle at 27% 27%, rgba(255, 255, 255, 0.8), #fee73b 33%);
 }
 .grid2 .flower__petal {
     background-image: none;
-    box-shadow: 0 0px 0 5px rgba(255, 255, 255, 0.3) inset;
+    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.3) inset;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,15 +193,15 @@ div#yellow.hasActive::active {
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
-    -ms-grid-columns: 100px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
-    -ms-grid-rows: 100px  100px;
+    -ms-grid-columns: 110px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-rows: 110px  100px;
     grid-template: repeat(2, 100px) / repeat(2, 100px);
 }
 .grid2 {
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
-    -ms-grid-columns: 100px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
+    -ms-grid-columns: 110px  100px;  /*for Edge: 10px wider columns and rows mimic grid-gap effect */
     -ms-grid-rows: 100px ;
     grid-template: 100px / repeat(2, 100px);  ;
 }
@@ -212,7 +213,7 @@ div#yellow.hasActive::active {
 .flower__petal:nth-child(2)  {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
-    -ms-grid-column-align: end;
+  //  -ms-grid-column-align: end;
 }
 .flower__petal:nth-child(3)  {
     -ms-grid-row: 2;
@@ -223,7 +224,7 @@ div#yellow.hasActive::active {
     -ms-grid-row: 2;
     -ms-grid-column: 2;
     -ms-grid-row-align: end;
-    -ms-grid-column-align: end;
+ //   -ms-grid-column-align: end;
 }
 .leave:nth-child(1)  {
     -ms-grid-row: 1; 
